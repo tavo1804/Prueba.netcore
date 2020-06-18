@@ -1,0 +1,121 @@
+﻿@model prjSegundoCrud.Models.Usuario
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <script src="~/js/Usuario/script.js"></script>
+
+<div class="contenedor">
+    <hgroup>
+        <h2>Editar Usuario</h2>
+    </hgroup>
+    <br />
+    <form asp-action="Edit" onsubmit="return validarcampos();">
+        <input type="hidden" value="Id" />
+        <input asp-for="Id" type="hidden" id="idcliente" />
+        <div class="form-group">
+            <input asp-for="Identificacion" placeholder="Ingrese la Identificacion" class="input__text" id="Identificacion" />
+        </div>
+        <div class="form-group">
+            <input asp-for="Nombre" placeholder="Ingrese el Nombre" class="input__text" id="Nombre" />
+        </div>
+        <div class="form-group">
+            <input asp-for="Apellido " placeholder="Ingrese el Apellido" class="input__text" id="Apellido" />
+        </div>
+        <div class="form-group">
+            <input asp-for="Correo" placeholder="Ingrese el Email" class="input__text" id="Correo" />
+        </div>
+        <div class="form-group">
+            <input asp-for="User" placeholder="Ingrese el usuario" class="input__text" id="User" />
+        </div>
+        <div class="form-group">
+            <input asp-for="Password" placeholder="Ingrese el Password" class="input__text" id="Pass" />
+        </div>
+        <div class="form-group">
+            <select asp-for="IdRol" id="cboRol" class="input__text">
+            </select>
+        </div>
+        <div class="btn__group">
+            <input type="submit" name="Crear" value="Guardar" class="btn btn__primary" />
+            <a class="btn btn__danger" asp-action="Index">Cancelar</a>
+        </div>
+    </form>
+</div>
+
+
+
+@section scripts {
+    <script type="text/javascript">
+
+
+$(document).ready(function () {
+
+
+ 
+    CargarCombo();
+
+
+});
+
+function CargarCombo() {
+
+
+    // Obtenemos el id del usuario
+    var Id;
+    var modificador;
+    var retorno = "";
+    Id = document.getElementById("idcliente").value;
+    $.ajax({
+
+        type: "GET",
+        url: "@Url.Action("FiltraUsurioRol","Usuario")",
+        data: { id: Id },
+        dataType: "json",
+        success: function (response) {
+
+            $.each(response, function (key, registro2) {
+                iddefecto = registro2.rolid;
+            });
+
+            $.ajax({
+
+                type: "GET",
+                url: "@Url.Action("ObtenerRol","Usuario")",
+                dataType: "json",
+                success: function (data) {
+  
+                    $.each(data, function (key, registro) {
+
+                        id = registro.id;
+                        nombrerol = registro.nombre
+
+
+                        if (id == iddefecto) {
+
+                            modificador = "selected='selected'";
+                        }
+
+                        else {
+                            modificador = "";
+                        }
+
+                        retorno += "<option " + modificador + " value='" + id + "'>";
+                        retorno += nombrerol;
+                        retorno += "</option>";
+
+                    });
+
+                    $("#cboRol").append(retorno);
+                }
+            });
+
+        }
+
+    });
+   
+}
+     
+    </script>
+}
+

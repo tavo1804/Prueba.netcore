@@ -1,0 +1,53 @@
+﻿@model prjSegundoCrud.Models.Usuario
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <script src="~/lib/jquery/jquery-3.1.1.min.js"></script>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src=" https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css" />
+    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+    <link href="~/css/Login.css" rel="stylesheet" />
+    <script src="~/Sweetalert/sweetalert2.min.js"></script>
+</head>
+
+<body>
+    <form >
+        <div class="modal-dialog text-center">
+            <div class="col-sm-8 main-selection">
+                <div class="modal-content">
+                    <div class="col-12 user-img">
+                        <img src="~/imagenes/avatar-2.png" />
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group" id="user-group">
+                            <label asp-for="User" style="color :white"></label>
+                            <input type="text" id="txtusuario" placeholder="Ingrese el Usuario" required class="form-control" />
+                        </div>
+                        <div class="form-group" id="contrasena-group">
+                            <label asp-for="Password" style="color :white"></label>
+                            <input type="password" id="txtpassword" placeholder="Ingrese la clave" required class="form-control" />
+                        </div>
+                        <button type="button" id="btnEntrar" class="btn btn-primary" style="color:white">Ingresar</button>
+                    </div>
+                    <div class="col-12 forgot">
+                        <a href="#" style="color: white;">Recordar Clave</a>
+                        <br />
+                        <a href="" style="color: white">Registrate aqui</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <script src="~/js/Login/ValidarUsuario.js"></script>
+    <script src="~/Sweetalert/sweetalert2.min.js"></script>
+</body>
+</html>

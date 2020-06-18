@@ -1,0 +1,77 @@
+﻿@using prjSegundoCrud.Helper
+@using System.Security.Claims;
+@using System.Security.Principal;
+@using prjSegundoCrud.Models;
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link href="~/css/estilos.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="~/js/Cliente/script.js"></script>
+    <script src="~/js/Usuario/script.js"></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">Sistema Registro</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+            
+                <div class="collapse navbar-collapse" id="navbarColor01">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle text-white" id="navbarDropDown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Contenidos
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropDown">
+                                <a class="dropdown-item" asp-controller="Cliente" asp-action="Index">Clientes</a>
+                         
+                                    <a class="dropdown-item" asp-controller="Usuario" asp-action="Index">Usuarios</a>
+                                
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-page="/Account/Manage/Index" title="Manage">Hola @DatosSesion.GetName(User)</a>
+                        </li>
+                        <li class="nav-item">
+                            <form class="form-inline" asp-area="" asp-controller="Login" asp-action="CerrarSesion">
+                                <button type="submit" class="nav-link btn btn-link text-white">Salir</button>
+                            </form>
+                        </li>
+                        @*<div class="alert alert-info">
+                                      Usuario Atenticado
+                                      <ul>
+                                          <li>@DatosSesion.GetNameIdentifier(User)</li>
+                                          <li>@DatosSesion.GetName(User)</li>
+                                          <li>@(((ClaimsIdentity)User.Identity).FindFirst(ClaimTypes.Email).Value)</li>
+                                          <li>@DatosSesion.GetValue(User, "Dato")</li>
+                                      </ul>
+                            </div>*@
+                    </ul>
+                }
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
